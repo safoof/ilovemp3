@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Normalize Audio – Make MP3 loudness consistent | iLoveMP3</title>
+    <meta name="description" content="Normalize the loudness of MP3 files to Spotify, YouTube, Apple Music or podcast standards. Batch processing. Free, and your files never leave your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/normalize.js"></script>
+  </head>
+  <body data-tool="normalize-audio" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Normalize Audio</h1>
+        <p class="lead">Make all your tracks play at the same loudness, so nobody has to reach for the volume knob. Matches the targets used by Spotify, YouTube, Apple Music and podcast apps.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select audio files</button>
+        <p class="drop-hint">or drop them here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" multiple hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your files are processed on your device and never uploaded.</div>
+      </section>
+
+      <section class="workspace container" data-stage-panel="edit" hidden>
+        <div class="card">
+          <div class="toolbar">
+            <h2>Files to normalize</h2>
+            <div class="toolbar-actions">
+              <button type="button" class="btn btn-secondary btn-sm" data-pick>Add files</button>
+            </div>
+          </div>
+          <ul class="file-list" id="file-list"></ul>
+        </div>
+
+        <aside class="card panel">
+          <h2>Loudness target</h2>
+          <div class="options" role="radiogroup" aria-label="Loudness target">
+            <label class="option">
+              <input type="radio" name="target" value="-14" checked />
+              <span><strong>Streaming · −14 LUFS</strong><small>Spotify, YouTube, Tidal, Amazon Music.</small></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="target" value="-16" />
+              <span><strong>Podcasts · −16 LUFS</strong><small>Apple Music, Apple Podcasts and most podcast apps.</small></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="target" value="-23" />
+              <span><strong>Broadcast · −23 LUFS</strong><small>The EBU R128 standard for TV and radio.</small></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="target" value="peak" />
+              <span><strong>Maximize peaks</strong><small>Raise the volume until the loudest peak is at −1 dB.</small></span>
+            </label>
+          </div>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="run">Normalize</button>
+          <p class="help">Each file keeps its original quality and tags. A limiter stops the loudest peaks from distorting.</p>
+        </aside>
+      </section>
+
+      <section class="working container" data-stage-panel="working" hidden>
+        <h2 class="progress-label">Working…</h2>
+        <div class="progress-bar"><span></span></div>
+        <p class="progress-pct">0%</p>
+      </section>
+
+      <section class="done container" data-stage-panel="done" hidden>
+        <div class="done-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg></div>
+        <h1 id="result-title"></h1>
+        <p class="done-meta" id="result-meta"></p>
+        <button type="button" class="btn btn-primary btn-xl" id="download"></button>
+        <ul class="file-list" id="results"></ul>
+        <div class="done-links">
+          <button type="button" class="btn-link" id="back">Back to options</button>
+          <button type="button" class="btn-link" id="restart">Normalize other files</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

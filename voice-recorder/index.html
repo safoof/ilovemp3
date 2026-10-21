@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voice Recorder – Record audio and save as MP3 | iLoveMP3</title>
+    <meta name="description" content="Record your voice with your microphone and save it as an MP3. Free, no sign-up, and your recording never leaves your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/recorder.js"></script>
+  </head>
+  <body data-tool="voice-recorder" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Voice Recorder</h1>
+        <p class="lead">Record a voice memo, a podcast intro or a song idea with your microphone, then save it as an MP3.</p>
+
+        <div class="card recorder" data-state="idle">
+          <canvas class="meter" id="meter" aria-hidden="true"></canvas>
+          <div class="rec-time" id="timer" role="timer">0:00.0</div>
+          <div class="rec-controls">
+            <button type="button" class="btn btn-secondary rec-side" id="pause" hidden></button>
+            <button type="button" class="rec-button" id="record" aria-label="Start recording"><span></span></button>
+            <span class="rec-side" aria-hidden="true"></span>
+          </div>
+          <p class="rec-status" id="status">Press the button to start recording.</p>
+          <details class="rec-settings">
+            <summary>Microphone settings</summary>
+            <label class="field">
+              <span class="field-label">Microphone</span>
+              <select class="input" id="device"><option value="">Default microphone</option></select>
+            </label>
+            <label class="check"><input type="checkbox" id="noise" checked /><span>Reduce background noise</span></label>
+            <label class="check"><input type="checkbox" id="echo" checked /><span>Echo cancellation<small>Turn off when recording music.</small></span></label>
+            <label class="check"><input type="checkbox" id="agc" /><span>Automatic volume</span></label>
+          </details>
+        </div>
+
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your recording stays on your device and is never uploaded.</div>
+      </section>
+
+      <section class="workspace container" data-stage-panel="edit" hidden>
+        <div class="card">
+          <div class="toolbar">
+            <h2>Your recording</h2>
+            <div class="toolbar-actions">
+              <button type="button" class="btn btn-secondary btn-sm" data-restart>Record again</button>
+            </div>
+          </div>
+          <div id="waveform"></div>
+          <div class="time-axis"><span>0:00</span><span id="duration"></span></div>
+          <audio controls class="preview-audio" id="take-audio"></audio>
+        </div>
+
+        <aside class="card panel">
+          <h2>Save recording</h2>
+          <label class="field">
+            <span class="field-label">File name</span>
+            <input class="input" id="name" autocomplete="off" />
+          </label>
+          <label class="check"><input type="checkbox" id="trim" checked /><span>Trim silence at the start and end</span></label>
+          <label class="field">
+            <span class="field-label">Quality</span>
+            <select class="input" id="bitrate">
+              <option value="96">96 kbps · good for voice</option>
+              <option value="128" selected>128 kbps · recommended</option>
+              <option value="192">192 kbps · music</option>
+              <option value="320">320 kbps · best quality</option>
+            </select>
+          </label>
+          <p class="panel-summary" id="summary"></p>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="run">Save as MP3</button>
+        </aside>
+      </section>
+
+      <section class="working container" data-stage-panel="working" hidden>
+        <h2 class="progress-label">Working…</h2>
+        <div class="progress-bar"><span></span></div>
+        <p class="progress-pct">0%</p>
+      </section>
+
+      <section class="done container" data-stage-panel="done" hidden>
+        <div class="done-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg></div>
+        <h1>Your recording is ready</h1>
+        <p class="done-meta" id="result-meta"></p>
+        <button type="button" class="btn btn-primary btn-xl" id="download">Download MP3</button>
+        <audio controls id="result-audio"></audio>
+        <div class="done-links">
+          <button type="button" class="btn-link" id="back">Back</button>
+          <button type="button" class="btn-link" data-restart>Record something new</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

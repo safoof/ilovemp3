@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Remove Silence – Cut silence from MP3 online | iLoveMP3</title>
+    <meta name="description" content="Automatically remove silence from the start and end of an MP3 and shorten long pauses. Free, and your file never leaves your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/silence.js"></script>
+  </head>
+  <body data-tool="remove-silence" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Remove Silence</h1>
+        <p class="lead">Cut the dead air from the start and end of a recording, and shorten long pauses in podcasts, lectures and voice notes.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select audio file</button>
+        <p class="drop-hint">or drop it here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your file is processed on your device and never uploaded.</div>
+      </section>
+
+      <template id="tool-options">
+        <div class="field">
+          <span class="field-label">Remove</span>
+          <div class="segmented" role="radiogroup" aria-label="What to remove">
+            <label><input type="radio" name="mode" value="all" checked /><span>Long pauses</span></label>
+            <label><input type="radio" name="mode" value="edges" /><span>Start &amp; end only</span></label>
+          </div>
+        </div>
+        <label class="field" id="pause-field">
+          <span class="field-label">Shorten pauses to</span>
+          <select class="input" id="keep-pause">
+            <option value="0.25">0.25 seconds</option>
+            <option value="0.5" selected>0.5 seconds</option>
+            <option value="1">1 second</option>
+            <option value="2">2 seconds</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field-label">What counts as silence</span>
+          <select class="input" id="threshold">
+            <option value="-55">Only complete silence</option>
+            <option value="-45" selected>Very quiet parts (recommended)</option>
+            <option value="-35">Quiet parts and background noise</option>
+          </select>
+        </label>
+      </template>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

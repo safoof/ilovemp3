@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Volume Booster – Make MP3 louder online | iLoveMP3</title>
+    <meta name="description" content="Increase or decrease the volume of an MP3 without distortion. Free, and your file never leaves your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/volume.js"></script>
+  </head>
+  <body data-tool="volume-booster" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Volume Booster</h1>
+        <p class="lead">Make a quiet recording louder, or turn a loud one down. A built-in limiter stops the loudest parts from distorting.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select audio file</button>
+        <p class="drop-hint">or drop it here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your file is processed on your device and never uploaded.</div>
+      </section>
+
+      <template id="tool-options">
+        <div class="field">
+          <div class="field-row"><span class="field-label">Volume change</span><output class="range-value" id="gain-value"></output></div>
+          <input type="range" class="range" id="gain" min="-20" max="30" step="0.5" value="6" />
+          <div class="range-scale"><span>Quieter</span><span>Louder</span></div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" id="maximize">Make as loud as possible without distortion</button>
+        <label class="check"><input type="checkbox" id="limiter" checked /><span>Prevent distortion<small>Gently limits peaks that would otherwise clip.</small></span></label>
+      </template>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

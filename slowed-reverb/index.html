@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slowed + Reverb Maker – Slowed, nightcore and sped up songs | iLoveMP3</title>
+    <meta name="description" content="Make slowed + reverb, nightcore and sped up versions of any song online. Free, and your file never leaves your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/slowed.js"></script>
+  </head>
+  <body data-tool="slowed-reverb" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Slowed + Reverb</h1>
+        <p class="lead">Turn any song into a dreamy slowed + reverb version, or speed it up for nightcore. Pick a preset or dial in your own sound.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select a song</button>
+        <p class="drop-hint">or drop it here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your file is processed on your device and never uploaded.</div>
+      </section>
+
+      <template id="tool-options">
+        <div class="field">
+          <span class="field-label">Style</span>
+          <div class="chips" id="styles">
+            <button type="button" class="chip chip-sm" data-style="slowed">Slowed + reverb</button>
+            <button type="button" class="chip chip-sm" data-style="super">Super slowed</button>
+            <button type="button" class="chip chip-sm" data-style="nightcore">Nightcore</button>
+            <button type="button" class="chip chip-sm" data-style="spedup">Sped up</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-row"><span class="field-label">Speed</span><output class="range-value" id="speed-value"></output></div>
+          <input type="range" class="range" id="speed" min="0.5" max="1.5" step="0.01" value="0.85" />
+        </div>
+        <div class="field">
+          <div class="field-row"><span class="field-label">Reverb</span><output class="range-value" id="mix-value"></output></div>
+          <input type="range" class="range" id="mix" min="0" max="1" step="0.05" value="0.4" />
+        </div>
+        <div class="field">
+          <div class="field-row"><span class="field-label">Room size</span><output class="range-value" id="size-value"></output></div>
+          <input type="range" class="range" id="size" min="1" max="6" step="0.5" value="3" />
+        </div>
+      </template>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

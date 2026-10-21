@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Change Pitch – Pitch shifter and key changer online | iLoveMP3</title>
+    <meta name="description" content="Shift the pitch of an MP3 up or down in semitones without changing the tempo. Free, and your file never leaves your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/pitch.js"></script>
+  </head>
+  <body data-tool="change-pitch" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Change Pitch</h1>
+        <p class="lead">Change the key of a song to match your vocal range or instrument, without speeding it up or slowing it down.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select audio file</button>
+        <p class="drop-hint">or drop it here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your file is processed on your device and never uploaded.</div>
+      </section>
+
+      <template id="tool-options">
+        <div class="field">
+          <div class="field-row"><span class="field-label">Pitch</span><output class="range-value" id="pitch-value"></output></div>
+          <input type="range" class="range" id="semitones" min="-12" max="12" step="1" value="2" />
+          <div class="range-scale"><span>−1 octave</span><span>+1 octave</span></div>
+        </div>
+        <div class="stepper">
+          <button type="button" class="btn btn-secondary btn-sm" data-step="-1">− Semitone</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-step="0">Reset</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-step="1">+ Semitone</button>
+        </div>
+      </template>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

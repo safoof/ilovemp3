@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vocal Remover – Make karaoke and instrumental tracks online | iLoveMP3</title>
+    <meta name="description" content="Remove vocals from a song to create a karaoke or instrumental version. Free, and your file never leaves your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/vocals.js"></script>
+  </head>
+  <body data-tool="vocal-remover" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Vocal Remover</h1>
+        <p class="lead">Remove the lead vocals from a song to make a karaoke or instrumental track. Works best on studio recordings where the singer is in the centre of the mix.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select a song</button>
+        <p class="drop-hint">or drop it here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your file is processed on your device and never uploaded.</div>
+      </section>
+
+      <template id="tool-options">
+        <div class="field">
+          <div class="field-row"><span class="field-label">Strength</span><output class="range-value" id="strength-value"></output></div>
+          <input type="range" class="range" id="strength" min="0.5" max="1" step="0.05" value="1" />
+        </div>
+        <label class="check"><input type="checkbox" id="keep-bass" checked /><span>Keep the bass<small>Bass and kick drums are usually in the centre too. This keeps them.</small></span></label>
+        <p class="help">This removes anything panned to the centre, which is usually the lead vocal. Backing vocals and reverb that are spread out in stereo may remain.</p>
+      </template>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>

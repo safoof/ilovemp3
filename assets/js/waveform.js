@@ -1,4 +1,6 @@
-// Interactive waveform with a draggable selection.
+// Interactive waveform. In "select" mode it has a draggable selection; in
+// "cursor" mode clicking places a cursor (used to pick a preview position);
+// "view" mode is display only.
 
 const MIN_SELECTION = 0.1; // seconds
 const BAR_WIDTH = 2;
@@ -33,12 +35,15 @@ export class Waveform {
   #abort = new AbortController();
   #observer;
 
-  constructor(root, buffer, { onChange } = {}) {
+  constructor(root, buffer, { mode = 'select', onChange, onSeek } = {}) {
     this.root = root;
+    this.mode = mode;
     this.duration = buffer.duration;
     this.onChange = onChange;
+    this.onSeek = onSeek;
     this.start = 0;
     this.end = buffer.duration;
+    this.cursor = 0;
     this.peaks = computePeaks(buffer);
 
     root.classList.add('waveform');
@@ -48,10 +53,21 @@ export class Waveform {
         <button type="button" class="wf-handle wf-handle-start" aria-label="Selection start (use arrow keys to adjust)"></button>
         <button type="button" class="wf-handle wf-handle-end" aria-label="Selection end (use arrow keys to adjust)"></button>
       </div>
+      <div class="wf-cursor"></div>
       <div class="wf-playhead" hidden></div>`;
     this.canvas = root.querySelector('canvas');
     this.region = root.querySelector('.wf-region');
+    this.cursorEl = root.querySelector('.wf-cursor');
     this.playhead = root.querySelector('.wf-playhead');
+    this.region.hidden = mode !== 'select';
+    this.cursorEl.hidden = mode !== 'cursor';
+    if (mode === 'cursor') {
+      root.tabIndex = 0;
+      root.setAttribute('role', 'slider');
+      root.setAttribute('aria-label', 'Preview start position');
+      root.setAttribute('aria-valuemin', '0');
+      root.setAttribute('aria-valuemax', String(Math.round(this.duration)));
+    }
 
     this.#observer = new ResizeObserver(() => this.draw());
     this.#observer.observe(root);
@@ -77,6 +93,24 @@ export class Waveform {
     this.end = end;
     this.#update();
     this.onChange?.(this.selection);
+  }
+
+  setCursor(time) {
+    this.cursor = clamp(time, 0, this.duration);
+    this.cursorEl.style.left = `${(this.cursor / this.duration) * 100}%`;
+    this.root.setAttribute('aria-valuenow', String(Math.round(this.cursor)));
+    this.onSeek?.(this.cursor);
+  }
+
+  /** Draws thin vertical lines at the given times (e.g. split points). */
+  setMarkers(times) {
+    for (const marker of this.root.querySelectorAll('.wf-marker')) marker.remove();
+    for (const time of times) {
+      const marker = document.createElement('div');
+      marker.className = 'wf-marker';
+      marker.style.left = `${(time / this.duration) * 100}%`;
+      this.root.append(marker);
+    }
   }
 
   setPlayhead(time) {
@@ -144,8 +178,18 @@ export class Waveform {
     this.root.addEventListener(
       'pointerdown',
       (down) => {
-        if (down.button !== 0) return;
+        if (down.button !== 0 || this.mode === 'view') return;
         down.preventDefault();
+        if (this.mode === 'cursor') {
+          this.root.focus();
+          this.setCursor(this.#timeAt(down.clientX));
+          this.root.setPointerCapture(down.pointerId);
+          const onMove = (e) => this.setCursor(this.#timeAt(e.clientX));
+          const onUp = () => this.root.removeEventListener('pointermove', onMove);
+          this.root.addEventListener('pointermove', onMove, { signal });
+          this.root.addEventListener('pointerup', onUp, { signal, once: true });
+          return;
+        }
         const handle = down.target.closest('.wf-handle');
         handle?.focus();
         const mode = handle ? (handle.classList.contains('wf-handle-start') ? 'start' : 'end') : 'new';
@@ -183,6 +227,18 @@ export class Waveform {
   }
 
   #bindKeys() {
+    this.root.addEventListener(
+      'keydown',
+      (e) => {
+        if (this.mode !== 'cursor' || e.target !== this.root) return;
+        const step = e.shiftKey ? 10 : 1;
+        const delta = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
+        if (!delta) return;
+        e.preventDefault();
+        this.setCursor(this.cursor + delta);
+      },
+      { signal: this.#abort.signal },
+    );
     this.region.addEventListener(
       'keydown',
       (e) => {

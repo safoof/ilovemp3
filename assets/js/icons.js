@@ -22,6 +22,19 @@ const PATHS = {
   image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
   bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
   device: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+  volume: '<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>',
+  level: '<path d="M3 4.5h18"/><path d="M6 19v-9M10 19V8M14 19v-7M18 19V9"/>',
+  gauge: '<path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><circle cx="12" cy="14" r="1.2"/>',
+  pitch: '<path d="M8 18V6l6-2"/><circle cx="5" cy="18" r="3"/><path d="m16 8 3-3 3 3M16 16l3 3 3-3"/>',
+  sliders: '<path d="M6 3v18M12 3v18M18 3v18"/><circle cx="6" cy="14" r="2.2" fill="currentColor"/><circle cx="12" cy="8" r="2.2" fill="currentColor"/><circle cx="18" cy="16" r="2.2" fill="currentColor"/>',
+  micOff: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/><path d="m3 3 18 18"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/>',
+  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  split: '<rect x="2" y="8" width="5.5" height="8" rx="1.2"/><rect x="9.25" y="8" width="5.5" height="8" rx="1.2"/><rect x="16.5" y="8" width="5.5" height="8" rx="1.2"/>',
+  silence: '<path d="M2 12h1.5M6 9v6M9 6v12M12 12h3M18 7v10M21 10v4"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  stop: '<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  record: '<circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/>',
 };
 
 export function icon(name, className = 'icon') {
