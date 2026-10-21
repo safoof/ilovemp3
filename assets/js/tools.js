@@ -1,0 +1,55 @@
+export const CATEGORIES = [
+  { id: 'all', label: 'All' },
+  { id: 'edit', label: 'Edit' },
+  { id: 'convert', label: 'Convert' },
+  { id: 'optimize', label: 'Optimize' },
+  { id: 'organize', label: 'Organize' },
+];
+
+export const TOOLS = [
+  {
+    slug: 'trim-mp3',
+    name: 'Trim MP3',
+    short: 'Trim',
+    category: 'edit',
+    icon: 'scissors',
+    color: 'var(--c-trim)',
+    description: 'Cut out the part you want, or remove the part you don’t. Add a smooth fade in or out.',
+  },
+  {
+    slug: 'merge-mp3',
+    name: 'Merge MP3',
+    short: 'Merge',
+    category: 'edit',
+    icon: 'merge',
+    color: 'var(--c-merge)',
+    description: 'Join several MP3s into one file in the order you choose, with optional silence between tracks.',
+  },
+  {
+    slug: 'convert-mp3',
+    name: 'Convert to MP3',
+    short: 'Convert',
+    category: 'convert',
+    icon: 'convert',
+    color: 'var(--c-convert)',
+    description: 'Turn WAV, M4A, FLAC, OGG or even video files into MP3. Or convert MP3 to WAV.',
+  },
+  {
+    slug: 'compress-mp3',
+    name: 'Compress MP3',
+    short: 'Compress',
+    category: 'optimize',
+    icon: 'compress',
+    color: 'var(--c-compress)',
+    description: 'Make MP3 files smaller while keeping the best sound quality possible.',
+  },
+  {
+    slug: 'edit-mp3-tags',
+    name: 'Edit MP3 Tags',
+    short: 'Tags',
+    category: 'organize',
+    icon: 'tag',
+    color: 'var(--c-tags)',
+    description: 'Change the title, artist, album, cover art and other ID3 tags without touching the audio.',
+  },
+];

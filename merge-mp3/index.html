@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-root="..">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Merge MP3 – Join audio files online for free | iLoveMP3</title>
+    <meta name="description" content="Combine multiple MP3 files into one. Put them in any order and add silence between tracks. Free, and your files never leave your device." />
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="module" src="../assets/js/pages/merge.js"></script>
+  </head>
+  <body data-tool="merge-mp3" data-stage="upload">
+    <header class="site-header" data-site-header></header>
+
+    <main>
+      <section class="hero container" data-stage-panel="upload">
+        <h1>Merge MP3</h1>
+        <p class="lead">Combine several MP3s into one file, in the order you want. Works with WAV, M4A, OGG and FLAC files too.</p>
+        <button type="button" class="btn btn-primary btn-xl" data-pick>Select audio files</button>
+        <p class="drop-hint">or drop them here</p>
+        <input type="file" id="file-input" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" multiple hidden />
+        <div class="privacy-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Your files are processed on your device and never uploaded.</div>
+      </section>
+
+      <section class="workspace container" data-stage-panel="edit" hidden>
+        <div class="card">
+          <div class="toolbar">
+            <h2>Track order</h2>
+            <div class="toolbar-actions">
+              <button type="button" class="btn btn-secondary btn-sm" id="sort">Sort A–Z</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-pick>Add files</button>
+            </div>
+          </div>
+          <ol class="file-list" id="file-list"></ol>
+          <p class="hint">Drag files or use the arrows to change the order.</p>
+        </div>
+
+        <aside class="card panel">
+          <h2>Merge options</h2>
+          <label class="field">
+            <span class="field-label">Silence between tracks</span>
+            <select class="input" id="gap">
+              <option value="0">None</option>
+              <option value="0.5">0.5 seconds</option>
+              <option value="1">1 second</option>
+              <option value="2">2 seconds</option>
+              <option value="3">3 seconds</option>
+              <option value="5">5 seconds</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Quality</span>
+            <select class="input" id="bitrate">
+              <option value="128">128 kbps · smaller file</option>
+              <option value="160">160 kbps</option>
+              <option value="192" selected>192 kbps · recommended</option>
+              <option value="256">256 kbps</option>
+              <option value="320">320 kbps · best quality</option>
+            </select>
+          </label>
+          <p class="panel-summary" id="summary"></p>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="run">Merge MP3</button>
+        </aside>
+      </section>
+
+      <section class="working container" data-stage-panel="working" hidden>
+        <h2 class="progress-label">Working…</h2>
+        <div class="progress-bar"><span></span></div>
+        <p class="progress-pct">0%</p>
+      </section>
+
+      <section class="done container" data-stage-panel="done" hidden>
+        <div class="done-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg></div>
+        <h1>Your MP3s have been merged</h1>
+        <p class="done-meta" id="result-meta"></p>
+        <button type="button" class="btn btn-primary btn-xl" id="download">Download MP3</button>
+        <audio controls id="result-audio"></audio>
+        <div class="done-links">
+          <button type="button" class="btn-link" id="back">Back to track list</button>
+          <button type="button" class="btn-link" id="restart">Merge other files</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+  </body>
+</html>
